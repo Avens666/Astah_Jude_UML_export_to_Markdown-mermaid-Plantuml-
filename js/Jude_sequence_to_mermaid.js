@@ -10,7 +10,7 @@ run();
 
 function sortNumber(a, b)
 {
-    print((a.getIndex()) + '-' + (b.getIndex())+'='+ (parseInt(a.getIndex()*10) - parseInt(b.getIndex()*10)) + '\n' ); 
+//    print((a.getIndex()) + '-' + (b.getIndex())+'='+ (parseInt(a.getIndex()*10) - parseInt(b.getIndex()*10)) + '\n' ); 
     return  parseInt(a.getIndex()*10) - parseInt(b.getIndex()*10);
 }
 
@@ -60,44 +60,27 @@ function run() {
         var msg_reply = new Array(); //reply message, reply massage  no index
         var msg_reply_act = new Array();
         var reply_n = 0;
-         for (var i in msgs) 
-         {
-             if( msgs[i].getIndex() != null )
-             {
-                // print('index' +  msgs[i].getIndex()*10+'\n');
-                 msgs2[ msgs[i].getIndex() ] = msgs[i];
-             }
-             else
-             {
+        for (var i in msgs) 
+         {//find reply message
                 if( msgs[i].isReturnMessage() )
                 {
-                    //   print( 'reply:'+  msgs[i].getActivator() + '\n' );
                        msg_reply[reply_n] = msgs[i];
                        msg_reply_act[reply_n] =  msgs[i].getActivator();
                        reply_n++;
-                   // msgs2[ msgs[i].getIndex() + reply_num] = msgs[i];
                 }
-             }
          }
 
-//for (var i in msgs2) 
-//{
-//    print(i + ' '+ msgs2[i]+'  b\n');    
-//}         
-//         msgs2.sort(sortNumber) ;
+         msgs2 = msgs;
+    
+     msgs2.sort(sortNumber) ;
 
-//for (var i in msgs2) 
-//{
-//    print(i + ' '+ msgs2[i]+'\n');    
-//}
          for (var i in msgs2) 
-         //for (var i=0; i<msgs2.length; i++) 
          {
-             if(msgs2[i] == undefined)
+             if(msgs2[i] == undefined || msgs[i].isReturnMessage() )
              {
                  continue;
              }
-//print(i + ' '+ msgs2[i]);
+
             var m = lifelines.indexOf(msgs2[i].getSource() );
             var n = lifelines.indexOf(msgs2[i].getTarget() );
             var arrow = "->>" ;
