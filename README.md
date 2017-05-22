@@ -6,15 +6,19 @@ Both of them could insert to *Markdown*
 这两种格式都可以集成到markdown文件
 
 Use text format to save UML diagrams, you could use svn or git to manage your software design document.
+
 使用文本格式保存UML图，就可以对软件的设计文档进行版本管理
 
 ## Astah
 Astah is a UML model design software, could ask its web http://astah.net/
+
 Astah是专业的UML建模工具软件，请到其主页了解
 http://astah.net/
 
 You must install astah script plugin to use js script file of my project
+
 使用本项目的js脚本，需要安装Astah的脚本插件，这是其插件的地址
+
 https://github.com/ChangeVision/astah-script-plugin
 
 [Download astah script plugin]( http://astah.change-vision.com/plugins/astah_script_plugin/1.0.4.html)
