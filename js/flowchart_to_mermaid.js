@@ -60,16 +60,11 @@ function run() {
             var n = flow_obj.indexOf(flow[i].getTarget() );
             if(n >= 0)
             {
-            print(flow_names[m] +"-->"  );
-                if(flow[i].getGuard() == "Y")
+                print(flow_names[m] +"-->"  );
+                if(flow[i].getGuard() != "" )
                 {
-                    print("|Y| " );
+                    print("|"+ flow[i].getGuard() +"| " );
                 }
-                else  if(flow[i].getGuard() == "N")
-                {
-                     print("|N| " );
-                }
-                
             print( flow_names[n] +";\n"   );            
             }
         }
