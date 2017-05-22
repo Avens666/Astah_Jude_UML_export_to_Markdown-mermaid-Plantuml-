@@ -13,8 +13,6 @@ function run() {
             com.change_vision.jude.api.inf.model)) {
         var diagramViewManager = astah.getViewManager().getDiagramViewManager();
         var diagram = diagramViewManager.getCurrentDiagram();
-
-
        if (!(diagram instanceof IActivityDiagram)) 
        {
            print('Open a flowchart and run again.');
@@ -31,41 +29,30 @@ function run() {
          print('```mermaid\ngraph TB\n');
        // print(diagram.isFlowChart() )
         var flow = diagram.getActivity().getFlows();
-
-        
         var flow_names = new Array();
-        var flow_obj = new Array();
-        var m = 0;
-        for (var i in flow) {
-            var n = flow_obj.indexOf(flow[i].getSource() );
-            //print(n + ",");
-            if(n < 0)
-            {//
-           //     print(INDENT_STR+m+"[" +flow[i].getSource()+"];\n"  );
-                flow_names[m] = INDENT_STR+m;
-                flow_obj[m] = flow[i].getSource();
-                m++;
-            }            
-        }
-
-       
-        for (var i in flow) {
-            var n = flow_obj.indexOf(flow[i].getTarget() );
-            //print(n + ",");
-            if(n < 0)
-            {//
-            //    print(INDENT_STR+m+"[" +flow[i].getTarget()+"];\n"  );
-                flow_names[m] = INDENT_STR+m;
-                flow_obj[m] = flow[i].getTarget();
-                m++;
-            }            
-        }
-
-        //print object define
-         for (var i in flow_names) 
+        var flow_obj = diagram.getActivity().getActivityNodes();
+         for (var i in flow_obj) 
          {
-             print(INDENT_STR+i+"[" +flow_obj[i] + "];\n"  );
+            flow_names[i] = INDENT_STR+i;
+            var type = "flow_process";
+
+            var stereotypes=flow_obj[i].getStereotypes();
+            if(stereotypes.length == 1)
+            {
+                type = stereotypes[0];
+               // print(type);
+            }
+            //print object define
+            if(type == "judgement")
+            {
+                print(INDENT_STR+i+"{" +flow_obj[i] + "};\n"  );                
+            }
+            else
+            {
+                print(INDENT_STR+i+"[" +flow_obj[i] + "];\n"  );    
+            }
          }
+        
 
         //print flowchart logic
         for (var i in flow) {
@@ -85,9 +72,7 @@ function run() {
                 
             print( flow_names[n] +";\n"   );            
             }
-
         }
-
          print('```');
     }
 }
